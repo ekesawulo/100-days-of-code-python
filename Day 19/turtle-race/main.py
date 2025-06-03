@@ -4,6 +4,7 @@ from random import randint
 screen = turtle.Screen()
 screen.setup(width=500, height=400)
 
+# TODO: #1 consider having get valid bet and announce winner functions
 
 # Initially wanted to try this with random colours but quickly realised this wouldn't work.
 # def random_colour():

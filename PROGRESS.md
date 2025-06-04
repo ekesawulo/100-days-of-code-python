@@ -8,3 +8,6 @@ This is my personal log for the [100 Days of Code: Python Bootcamp by Angela Yu]
 ## DAY 16:
 - Started with OOP, was a bit confusing initially
 - Remodelled coffee machine project
+
+## DAY 21
+- reversing lists/tuples -> my_list[::-1]

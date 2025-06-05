@@ -11,7 +11,7 @@ STARTING_TURTLES = 3
 
 class Snake:
     """
-    Forms the snake object. It contains a constructor and 8 methods
+    Forms the snake object. It contains a constructor and 9 methods
     """
 
     def __init__(self) -> None:
@@ -30,7 +30,7 @@ class Snake:
             turt.penup()
             turt.goto((-MOVE_DISTANCE * i), 0)
 
-    def grow(self):
+    def grow(self) -> None:
         """
         Adds a new turtle so the snake grows longer when it eats food.
         The new segment is positioned at the current location of the last segment
@@ -42,7 +42,7 @@ class Snake:
         new_segment.goto(tail.position())
         self.turtles.append(new_segment)
 
-    def move(self):
+    def move(self) -> None:
         """
         Moves the snake forward. Each segment follows the segment in front of it.
         The head moves forward according to its current heading.
@@ -53,30 +53,37 @@ class Snake:
             self.turtles[i].goto(*new_position)
         self.head.forward(MOVE_DISTANCE)
 
-    def up(self):
+    def _set_direction(self, new_direction, opposite_direction) -> None:
+        """
+        Sets the direction of the head turtle and encapsulates the opposite direction change logic
+
+        Args:
+            new_direction (int): intended new direction of the turtle head
+            opposite_direction (int): opposite of intended direction
+        """
+        if self.head.heading() != opposite_direction:
+            self.head.setheading(new_direction)
+
+    def up(self) -> None:
         """
         Sets the direction of the head turtle upwards, subsequent turtles follow thanks to the logic of self.move()
         """
-        if self.head.heading() != DOWN:
-            self.head.setheading(UP)
+        self._set_direction(UP, DOWN)
 
-    def down(self):
+    def down(self) -> None:
         """
         Sets the direction of the head turtle downwards, subsequent turtles follow thanks to the logic of self.move()
         """
-        if self.head.heading() != UP:
-            self.head.setheading(DOWN)
+        self._set_direction(DOWN, UP)
 
-    def right(self):
+    def right(self) -> None:
         """
         Sets the direction of the head turtle to the right, subsequent turtles follow thanks to the logic of self.move()
         """
-        if self.head.heading() != LEFT:
-            self.head.setheading(RIGHT)
+        self._set_direction(RIGHT, LEFT)
 
-    def left(self):
+    def left(self) -> None:
         """
         Sets the direction of the head turtle left, subsequent turtles follow thanks to the logic of self.move()
         """
-        if self.head.heading() != RIGHT:
-            self.head.setheading(LEFT)
+        self._set_direction(LEFT, RIGHT)

@@ -24,18 +24,19 @@ screen.onkey(snake.right, "Right")
 screen.onkey(snake.left, "Left")
 
 
-def snake_game():
+def snake_game() -> None:
     """
     Game logic, detects food, walls, collisions with itself and allows the snake grow
     """
-    while True:
+    game_is_on = True
+    while game_is_on:
         screen.update()
         time.sleep(0.1)
         snake.move()
         # Detect food
         if snake.head.distance(food) < 15:
             food.refresh()
-            scoreboard.update()
+            scoreboard.increase_score()
             snake.grow()
         # Detect walls
         if (
@@ -45,12 +46,12 @@ def snake_game():
             or snake.head.ycor() < -280
         ):
             scoreboard.game_over()
-            break
+            game_is_on = False
         # Detect collision with body
         for turt in snake.turtles[1:]:
             if snake.head.distance(turt) < 10:
                 scoreboard.game_over()
-                break
+                game_is_on = False
 
 
 snake_game()

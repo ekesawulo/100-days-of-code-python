@@ -42,6 +42,16 @@ class Snake:
         new_segment.goto(tail.position())
         self.turtles.append(new_segment)
 
+    def reset(self) -> None:
+        """
+        Resets the snake (turtles) to start position
+        """
+        for turt in self.turtles:
+            turt.goto(1000, 1000)
+        self.turtles.clear()
+        self.create_snake()
+        self.head = self.turtles[0]
+
     def move(self) -> None:
         """
         Moves the snake forward. Each segment follows the segment in front of it.

@@ -16,18 +16,20 @@ class Scoreboard(Turtle):
         """
         super().__init__()
         self.score = 0
+        self.high_score = 0
         self.speed("fastest")
         self.color("white")
         self.teleport(0, 275)
         self.hideturtle()
-        self._display_score()
+        self._update_score()
 
-    def _display_score(self) -> None:
+    def _update_score(self) -> None:
         """
         Displays the scoreboard text
         """
+        self.clear()
         self.write(
-            arg=f"Score: {self.score}",
+            arg=f"Score: {self.score} High Score: {self.high_score}",
             move=False,
             align=ALIGNMENT,
             font=FONT,
@@ -37,13 +39,14 @@ class Scoreboard(Turtle):
         """
         Increments score by one and updates the new score after the snake eats food
         """
-        self.clear()
         self.score += 1
-        self._display_score()
+        self._update_score()
 
-    def game_over(self) -> None:
+    def reset(self) -> None:
         """
-        Displays game over text at the centre of the screen
+        Displays the new high score (if any) and resets the current score
         """
-        self.teleport(0, 0)
-        self.write(arg="GAME OVER", move=False, align=ALIGNMENT, font=FONT)
+        if self.score > self.high_score:
+            self.high_score = self.score
+        self.score = 0
+        self._update_score()

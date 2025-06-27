@@ -45,13 +45,14 @@ def snake_game() -> None:
             or snake.head.xcor() < -280
             or snake.head.ycor() < -280
         ):
-            scoreboard.game_over()
-            game_is_on = False
+            scoreboard.reset()
+            snake.reset()
+
         # Detect collision with body
         for turt in snake.turtles[1:]:
             if snake.head.distance(turt) < 10:
-                scoreboard.game_over()
-                game_is_on = False
+                scoreboard.reset()
+                snake.reset()
 
 
 snake_game()

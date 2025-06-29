@@ -16,7 +16,9 @@ class Scoreboard(Turtle):
         """
         super().__init__()
         self.score = 0
-        self.high_score = 0
+        with open("Day 20 and 21/data.txt") as file:
+            contents = int(file.read())
+        self.high_score = contents
         self.speed("fastest")
         self.color("white")
         self.teleport(0, 275)
@@ -48,5 +50,7 @@ class Scoreboard(Turtle):
         """
         if self.score > self.high_score:
             self.high_score = self.score
+            with open("Day 20 and 21/data.txt", "w") as file:
+                file.write(f"{self.high_score}")
         self.score = 0
         self._update_score()
